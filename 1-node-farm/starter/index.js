@@ -3,12 +3,16 @@ const url = require('url');
 const fs = require('fs');
 
 const replaceTemplate = require('./modules/replaceTemplate');
+const { default: slugify } = require('slugify');
 
 const tempOverview = fs.readFileSync(`${__dirname}/templates/overview.html`, 'utf-8');
 const tempCard = fs.readFileSync(`${__dirname}/templates/card.html`, 'utf-8');
 const tempProduct = fs.readFileSync(`${__dirname}/templates/product.html`, 'utf-8');
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, 'utf-8');
 const dataObj = JSON.parse(data); // json.loads(data) to object-array
+
+const slugs = dataObj.map(el => slugify(el.productName, {lower: true}));
+console.log(slugs);
 
 const server = http.createServer((req, res) => {  
 
