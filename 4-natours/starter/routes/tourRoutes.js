@@ -3,8 +3,16 @@ const tourController = require('../controllers/tourController');
 
 const router = express.Router(); 
 
-// param middleware // 
 // router.param('id', checkID); 
+
+router.route('/top-5-cheap')
+    .get(tourController.aliasTopTours, tourController.getAllTours); // alias middleware function
+
+router.route('/tour-stats')
+    .get(tourController.getTourStats);
+
+router.route('/get-monthly-plan/:year') // accept the year parameter
+    .get(tourController.getMonthlyPlan);
 
 router
     .route('/') 
